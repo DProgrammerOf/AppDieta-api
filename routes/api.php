@@ -20,8 +20,13 @@ Route::get('/', function () {
     return 'ola';
 });
 
-Route::get('/alimentos', [ AlimentosEndpoint::class, 'all' ]);
-Route::get('/alimentos/{id}', [ AlimentosEndpoint::class, 'get' ]);
+Route::prefix('food')->group(function () {
+    Route::get('/', [ AlimentosEndpoint::class, 'all' ]);
+    Route::get('/{id}', [ AlimentosEndpoint::class, 'get' ]);
+    Route::post('/save', [ AlimentosEndpoint::class, 'store' ]);
+});
 
-Route::get('/diarios', [ DiarioEndpoint::class, 'all' ]);
-Route::get('/diarios/{id}', [ DiarioEndpoint::class, 'get' ]);
+Route::prefix('diary')->group(function () {
+    Route::get('/', [ DiarioEndpoint::class, 'all' ]);
+    Route::get('/{id}', [ DiarioEndpoint::class, 'get' ]);
+});
