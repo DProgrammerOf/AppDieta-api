@@ -29,4 +29,5 @@ Route::prefix('food')->group(function () {
 Route::prefix('diary')->group(function () {
     Route::get('/', [ DiarioEndpoint::class, 'all' ]);
     Route::get('/{id}', [ DiarioEndpoint::class, 'get' ]);
+    Route::post('/save', [ DiarioEndpoint::class, 'store' ]);
 });
