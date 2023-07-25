@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 
 use App\Models\Diario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 class DiarioEndpoint extends BaseController
@@ -30,6 +31,18 @@ class DiarioEndpoint extends BaseController
             'success' => true,
             'message' => '',
             'diary' => Diario::find($id)
+        ];
+    }
+
+    public function today(): mixed
+    {
+        return [
+            'success' => true,
+            'message' => '',
+            'diaries' => Diario::whereBetween('date_at', [
+                Carbon::today('America/Sao_Paulo')->startOfDay(),
+                Carbon::today('America/Sao_Paulo')->endOfDay()
+            ])->get()
         ];
     }
 

@@ -27,7 +27,10 @@ Route::prefix('food')->group(function () {
 });
 
 Route::prefix('diary')->group(function () {
+    // crud
     Route::get('/', [ DiarioEndpoint::class, 'all' ]);
-    Route::get('/{id}', [ DiarioEndpoint::class, 'get' ]);
     Route::post('/save', [ DiarioEndpoint::class, 'store' ]);
+    // specifcs
+    Route::get('/find/{id}', [ DiarioEndpoint::class, 'get' ]);
+    Route::get('/today', [ DiarioEndpoint::class, 'today' ]);
 });
